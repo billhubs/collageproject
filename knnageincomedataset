@@ -1,0 +1,24 @@
+# Import library
+import numpy as np
+from sklearn.neighbors import KNeighborsClassifier
+
+# Data
+age = np.array([29, 51, 33, 24, 40, 45, 34])
+income = np.array([350, 430, 290, 225, 410, 380, 390])
+classes = np.array(['A', 'B', 'A', 'A', 'B', 'B', 'belum ditemukan'])
+
+# Reshape data
+X = np.column_stack((age, income))
+
+# Inisialisasi model KNN
+knn_model = KNeighborsClassifier(n_neighbors=3)
+
+# Latih model
+knn_model.fit(X, classes)
+
+# Prediksi class untuk sampel 7 (age=34, income=390)
+sample_7 = np.array([[34, 390]])
+predicted_class = knn_model.predict(sample_7)
+
+# Menampilkan hasil prediksi
+print("Prediksi class untuk Sampel 7:", predicted_class[0])
