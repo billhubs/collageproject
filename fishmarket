@@ -1,0 +1,39 @@
+# Import library
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+
+# Data
+cm = np.array([11.52, 12.48, 12.3778, 12.73, 12.444, 13.6024, 14.1795, 12.67, 14.0049, 14.2266, 14.2628, 14.3714, 13.7592, 13.9129, 14.9544])
+gram = np.array([242, 290, 340, 363, 430, 450, 500, 390, 450, 500, 475, 500, 500, 340, 600])
+
+# Reshape data
+cm = cm.reshape(-1, 1)
+gram = gram.reshape(-1, 1)
+
+# Inisialisasi model Linear Regression
+model = LinearRegression()
+
+# Latih model
+model.fit(cm, gram)
+
+# Prediksi berat berdasarkan tinggi
+gram_pred = model.predict(cm)
+
+# Evaluasi model
+mse = mean_squared_error(gram, gram_pred)
+r2 = r2_score(gram, gram_pred)
+
+# Visualisasi hasil
+plt.scatter(cm, gram, color='black', label='Data Asli')
+plt.plot(cm, gram_pred, color='blue', linewidth=3, label='Regresi Linear')
+plt.xlabel('Tinggi (cm)')
+plt.ylabel('Berat (gram)')
+plt.title('Simple Linear Regression - Fish Market Dataset')
+plt.legend()
+plt.show()
+
+# Menampilkan hasil evaluasi
+print("Mean Squared Error (MSE):", mse)
+print("R-squared (R2):", r2)
